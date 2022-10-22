@@ -23,9 +23,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_multi_selection);
         initComponent();
+
+        List<Inbox> items = DataGenerator.getPeopleData(this);
+        items.addAll(DataGenerator.getPeopleData(this));
     }
 
     private void initComponent() {
+
         // TODO 01. Generate the item list to be displayed using the DataGenerator class
         // TODO 03. Do the setup of a new RecyclerView instance to display the item list properly
         // TODO 04. Define the layout of each item in the list
