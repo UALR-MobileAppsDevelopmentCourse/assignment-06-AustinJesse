@@ -21,27 +21,15 @@ import com.ualr.recyclerviewassignment.model.Inbox;
 // TODO 08. Create a new method to add a new item on the top of the list. Use the DataGenerator class to create the new item to be added.
 
 public class MainActivity extends AppCompatActivity {
-
     private FloatingActionButton mFAB;
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private AdapterList mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_multi_selection);
         initComponent();
-
-        // TODO 01. Generate the item list to be displayed using the DataGenerator class
-        List<Inbox> items = DataGenerator.getInboxData(this);
-        items.addAll(DataGenerator.getInboxData(this));
-
-        // TODO 03. Do the setup of a new RecyclerView instance to display the item list properly
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager((this));
-
-
-
-
     }
 
 
@@ -50,8 +38,23 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        // TODO 01. Generate the item list to be displayed using the DataGenerator class
+        List<Inbox> items = DataGenerator.getInboxData(this);
+        items.addAll(DataGenerator.getInboxData(this));
+
+        // TODO 03. Do the setup of a new RecyclerView instance to display the item list properly
         // TODO 04. Define the layout of each item in the list
         // TODO 09. Create a new instance of the created Adapter class and bind it to the RecyclerView instance created in step 03
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager((this));
+
+        // Currently getting an error with the AdapterListBasic, due to no Adapter Class yet
+        mAdapter = new AdapterListBasic(this, items);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(mAdapter);
+
+
         mFAB = findViewById(R.id.fab);
         mFAB.setOnClickListener(new View.OnClickListener() {
             @Override
