@@ -12,6 +12,7 @@ import android.view.View;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ualr.recyclerviewassignment.Utils.DataGenerator;
 import com.ualr.recyclerviewassignment.model.Inbox;
+import com.ualr.recyclerviewassignment.Utils.Tools;
 
 // TODO 05. Create a new Adapter class and the corresponding ViewHolder class in a different file. The adapter will be used to populate
 //  the recyclerView and manage the interaction with the items in the list
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton mFAB;
     private RecyclerView recyclerView;
     private AdapterList mAdapter;
+    private int listStartPosit = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         // TODO 09. Create a new instance of the created Adapter class and bind it to the RecyclerView instance created in step 03
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager((this));
 
-        // Currently getting an error with the AdapterListBasic, due to no Adapter Class yet
         mAdapter = new AdapterList(this, items);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -73,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // TODO 10. Invoke the method created to a new item to the top of the list so it's
                 //  triggered when the user taps the Floating Action Button
+
+                //I tried looking at the slides but below is edited code from Ivans example code branch 6
+                mAdapter.addItem(listStartPosit, items.get(Tools.getRandomNumberInRange(listStartPosit,items.size()-1)));
+                recyclerView.scrollToPosition(listStartPosit);
             }
         });
     }

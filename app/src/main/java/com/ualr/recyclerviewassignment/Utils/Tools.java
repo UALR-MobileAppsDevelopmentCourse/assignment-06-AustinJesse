@@ -1,4 +1,5 @@
 package com.ualr.recyclerviewassignment.Utils;
+import java.util.Random;
 
 public class Tools {
     public static String getEmailFromName(String name) {
@@ -7,5 +8,10 @@ public class Tools {
             return email;
         }
         return name;
+    }
+
+    public static int getRandomNumberInRange(int min, int max) {
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + min;
     }
 }
