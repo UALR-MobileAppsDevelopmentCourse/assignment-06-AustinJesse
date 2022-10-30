@@ -23,7 +23,7 @@ import com.ualr.recyclerviewassignment.Utils.Tools;
 //  Implement a new method to delete the corresponding item in the list
 // TODO 08. Create a new method to add a new item on the top of the list. Use the DataGenerator class to create the new item to be added.
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
     private FloatingActionButton mFAB;
     private RecyclerView recyclerView;
     private AdapterList mAdapter;
