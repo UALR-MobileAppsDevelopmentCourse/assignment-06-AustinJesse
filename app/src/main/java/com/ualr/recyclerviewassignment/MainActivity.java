@@ -15,6 +15,8 @@ import com.ualr.recyclerviewassignment.model.Inbox;
 
 // TODO 05. Create a new Adapter class and the corresponding ViewHolder class in a different file. The adapter will be used to populate
 //  the recyclerView and manage the interaction with the items in the list
+    // I made changes to Inbox and created Adapter list based on the class slides
+    // Just needed to set up various sets for texts, backgrounds, etc
 // TODO 06. Detect click events on the list items. Implement a new method to toggle items' selection in response to click events
 // TODO 07. Detect click events on the thumbnail located on the left of every list row when the corresponding item is selected.
 //  Implement a new method to delete the corresponding item in the list
@@ -35,9 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void initComponent() {
-
-
-
         // TODO 01. Generate the item list to be displayed using the DataGenerator class
         List<Inbox> items = DataGenerator.getInboxData(this);
         items.addAll(DataGenerator.getInboxData(this));
@@ -48,12 +47,25 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager((this));
 
         // Currently getting an error with the AdapterListBasic, due to no Adapter Class yet
-        mAdapter = new AdapterListBasic(this, items);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        mAdapter = new AdapterList(this, items);
 
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(mAdapter);
 
+        mAdapter.setOnItemClickListener(new AdapterList.OnItemClickListener() {
+            @Override
+            public void OnItemClick(View view, Inbox obj, int position) {
+                mAdapter.toggleItemState(position);
+            }
+        });
+
+        mAdapter.setOnThumbnailClickListener(new AdapterList.OnItemClickListener() {
+            @Override
+            public void OnItemClick(View view, Inbox obj, int position) {
+                mAdapter.deleteItem(position);
+            }
+        });
 
         mFAB = findViewById(R.id.fab);
         mFAB.setOnClickListener(new View.OnClickListener() {
