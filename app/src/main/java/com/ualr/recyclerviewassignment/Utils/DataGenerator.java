@@ -24,12 +24,17 @@ public class DataGenerator {
         String name_arr[] = ctx.getResources().getStringArray(R.array.people_names);
         String date_arr[] = ctx.getResources().getStringArray(R.array.general_date);
 
+        //Im sure theres a way to use an iterator and array to get the initial but this is simpler
+        //Since the names were given in the code already I think im safe to do the same with the initials
+        String initial_arr[] = ctx.getResources().getStringArray(R.array.people_initials);
+
         for (int i = 0; i < name_arr.length; i++) {
             Inbox obj = new Inbox();
             obj.setFrom(name_arr[i]);
             obj.setEmail(Tools.getEmailFromName(obj.getFrom()));
             obj.setMessage(ctx.getResources().getString(R.string.lorem_ipsum));
             obj.setDate(date_arr[randInt(date_arr.length - 1)]);
+            obj.setInitials(initial_arr[i]);
             items.add(obj);
         }
         Collections.shuffle(items);
@@ -40,6 +45,7 @@ public class DataGenerator {
         List<Inbox> items = new ArrayList<>();
         String name_arr[] = ctx.getResources().getStringArray(R.array.people_names);
         String date_arr[] = ctx.getResources().getStringArray(R.array.general_date);
+        String initial_arr[] = ctx.getResources().getStringArray(R.array.people_initials);
         int indexName = randInt(name_arr.length - 1);
         int indexDate = randInt(date_arr.length - 1);
         Inbox obj = new Inbox();
